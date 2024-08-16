@@ -28,9 +28,10 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build
-    - name: Deploy to gh pages
-      run: |
-        npx angular-cli-ghpages --dir=dist/reactive-form-demo
-      env:
-        CI: true
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+    - name: Deploy
+      if: success()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: dist/angular-github-actions
+        enable_jekyll: true
