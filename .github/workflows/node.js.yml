@@ -28,3 +28,9 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build
+    - name: Deploy to gh pages
+      run: |
+        npx angular-cli-ghpages --dir=dist/reactive-form-demo
+      env:
+        CI: true
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
